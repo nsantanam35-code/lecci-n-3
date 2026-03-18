@@ -1,17 +1,52 @@
-/* Ejercicio 2: Fondo del cuerpo */
+/* Configuración Global */
 body {
-    background-color: lightblue;
+    font-family: 'Poppins', sans-serif;
+    color: #2d3436;
+    background-color: #f8f9fa !important;
 }
 
-/* Ejercicio 3: Títulos en rojo */
-h1, h2, h3, h4, h5, h6 {
-    color: red;
+/* Hero Section con Imagen de Fondo y Capa Oscura */
+.hero-section {
+    height: 70vh;
+    background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), 
+                url('https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?auto=format&fit=crop&q=80&w=1600');
+    background-size: cover;
+    background-position: center;
 }
 
-/* Ejercicio 4: Imagen centrada y con medidas */
-img {
-    width: 400px;
-    height: 300px;
-    display: block;
-    margin: 0 auto;
+/* Navbar */
+.navbar-brand {
+    font-size: 1.5rem;
+    letter-spacing: -1px;
+}
+
+/* Botones y Sombras */
+.btn-danger {
+    background-color: #e84118;
+    border: none;
+    transition: all 0.3s ease;
+}
+
+.btn-danger:hover {
+    background-color: #c23616;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(232, 65, 24, 0.3);
+}
+
+/* Tarjetas */
+.rounded-4 {
+    border-radius: 1rem !important;
+}
+
+.shadow-sm {
+    box-shadow: 0 .125rem .25rem rgba(0,0,0,.075) !important;
+}
+
+.shadow-lg {
+    box-shadow: 0 1rem 3rem rgba(0,0,0,.1) !important;
+}
+
+/* Transiciones Suaves */
+.card, .btn, .nav-link {
+    transition: 0.3s;
 }

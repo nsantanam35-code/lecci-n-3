@@ -1,1 +1,1 @@
-# lecci-n-3
+# leccion-3

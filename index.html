@@ -3,13 +3,191 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lección 3 - Ejercicios</title>
-    <link rel="stylesheet" href="assets/css/styles.css">
+    <title>MediMatch | Red de Salud Profesional</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    
+    <style>
+        :root { --primary-dark: #1e293b; --accent-red: #e11d48; --bg-body: #f8fafc; }
+        body { background-color: var(--bg-body); font-family: 'Inter', sans-serif; color: #334155; min-height: 100vh; display: flex; flex-direction: column; }
+        main { flex: 1; }
+        
+        .navbar { background-color: var(--primary-dark) !important; padding: 1rem 0; }
+        .hero { background: white; border-bottom: 1px solid #e2e8f0; padding: 60px 0; }
+        .img-pro { width: 100%; max-width: 500px; height: 350px; object-fit: cover; border-radius: 20px; box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1); border: 8px solid white; }
+
+        .card-pro { background: white; border: 1px solid #e2e8f0; border-radius: 16px; padding: 24px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); }
+        .progress { background-color: #e2e8f0; height: 10px; border-radius: 10px; overflow: hidden; }
+        
+        /* Animaciones CSS */
+        @keyframes fill85 { from { width: 0; } to { width: 85%; } }
+        @keyframes fill94 { from { width: 0; } to { width: 94%; } }
+        @keyframes fill70 { from { width: 0; } to { width: 70%; } }
+        .anim-85 { animation: fill85 2s forwards ease-in-out; }
+        .anim-94 { animation: fill94 2s forwards ease-in-out; }
+        .anim-70 { animation: fill70 2s forwards ease-in-out; }
+
+        .btn-action { background-color: var(--accent-red); color: white; border: none; padding: 14px 32px; font-weight: 700; border-radius: 10px; transition: 0.3s; }
+        .btn-action:hover { background-color: #be123c; transform: translateY(-2px); color: white; }
+
+        /* Footer Style */
+        footer { background-color: var(--primary-dark); color: #94a3b8; padding: 40px 0 20px; }
+        footer h5 { color: white; font-weight: 700; }
+        footer a { color: #94a3b8; text-decoration: none; transition: 0.3s; }
+        footer a:hover { color: white; }
+    </style>
 </head>
 <body>
-    <h1> ESTE ES EL TITULO (Lección 3)</h1>
-    <p>HOLA!!!!</p>
-    
-    <img src="/assets/img/mujer maravilla.jpg" alt="Imagen de prueba">
+
+    <nav class="navbar navbar-dark sticky-top">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="#"><i class="bi bi-intersect me-2 text-danger"></i>MediMatch</a>
+        </div>
+    </nav>
+
+    <main>
+        <header class="hero text-center mb-5">
+            <div class="container">
+                <h1 class="fw-extrabold mb-3" style="color: var(--primary-dark); font-size: 3rem;">Red de Salud Digital</h1>
+                <p class="text-muted fs-5 mb-4">Tecnología NatLab PRO para laboratorios de alta precisión.</p>
+                <div class="mb-5">
+                    <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=800" class="img-pro" alt="Laboratorio">
+                </div>
+                <button class="btn btn-action shadow-lg" data-bs-toggle="modal" data-bs-target="#modalCita">Solicitar Atención</button>
+            </div>
+        </header>
+
+        <div class="container mb-5">
+            <div class="row g-4 mb-5">
+                <div class="col-md-4">
+                    <div class="card-pro text-center">
+                        <h6 class="fw-bold text-muted small mb-3">EFICIENCIA DENTAL</h6>
+                        <div class="progress mb-2"><div class="progress-bar bg-success anim-85"></div></div>
+                        <div class="fw-bold">85%</div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card-pro text-center">
+                        <h6 class="fw-bold text-muted small mb-3">CALIDAD MATERIAL</h6>
+                        <div class="progress mb-2"><div class="progress-bar bg-danger anim-94"></div></div>
+                        <div class="fw-bold">94%</div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card-pro text-center">
+                        <h6 class="fw-bold text-muted small mb-3">TIEMPO ENTREGA</h6>
+                        <div class="progress mb-2"><div class="progress-bar bg-primary anim-70"></div></div>
+                        <div class="fw-bold">70%</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card-pro shadow-sm">
+                <h4 class="fw-bold mb-4">Directorio Profesional</h4>
+                <div class="table-responsive">
+                    <table class="table align-middle">
+                        <thead class="table-light text-muted small">
+                            <tr><th>ESPECIALIDAD</th><th>NOMBRE</th><th>ESTADO</th><th class="text-end">ACCIÓN</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Laboratorio Dental</td>
+                                <td class="fw-bold">Nataly Santana</td>
+                                <td><span class="badge bg-success-subtle text-success">Disponible</span></td>
+                                <td class="text-end"><button class="btn btn-sm btn-dark px-3 btn-ficha" data-name="Nataly Santana">Ver Ficha</button></td>
+                            </tr>
+                            <tr>
+                                <td>Odontología Pro</td>
+                                <td class="fw-bold">Dra. Jeraldine M.</td>
+                                <td><span class="badge bg-light text-muted border">En Consulta</span></td>
+                                <td class="text-end"><button class="btn btn-sm btn-dark px-3 btn-ficha" data-name="Dra. Jeraldine M.">Ver Ficha</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <h5>MediMatch</h5>
+                    <p class="small">Liderando la transformación digital en salud y servicios de laboratorio dental.</p>
+                    <div class="d-flex gap-3 fs-5">
+                        <a href="#"><i class="bi bi-linkedin"></i></a>
+                        <a href="#"><i class="bi bi-github"></i></a>
+                        <a href="#"><i class="bi bi-envelope-fill"></i></a>
+                    </div>
+                </div>
+                <div class="col-md-4 text-center">
+                    <h5>Enlaces</h5>
+                    <ul class="list-unstyled small">
+                        <li><a href="#">Privacidad</a></li>
+                        <li><a href="#">Términos de Servicio</a></li>
+                        <li><a href="#">Contacto</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <h5>Boletín Técnico</h5>
+                    <div class="input-group input-group-sm">
+                        <input type="email" id="emailBoletin" class="form-control bg-dark text-white border-secondary" placeholder="tu@email.com">
+                        <button class="btn btn-danger" onclick="suscribir()">Unirse</button>
+                    </div>
+                </div>
+            </div>
+            <hr class="my-4 border-secondary">
+            <div class="text-center small">
+                © 2026 MediMatch Pro. Todos los derechos reservados.
+            </div>
+        </div>
+    </footer>
+
+    <div class="modal fade" id="modalCita" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content border-0 shadow-lg rounded-4">
+                <div class="modal-body p-5 text-center">
+                    <h4 class="fw-bold mb-4">Nueva Solicitud</h4>
+                    <form id="formFinal">
+                        <input type="text" id="nombreInput" class="form-control mb-3 py-3" placeholder="Nombre completo" required>
+                        <button type="submit" class="btn btn-action w-100 py-3">Enviar a Revisión</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Función para los botones de la tabla
+        document.querySelectorAll('.btn-ficha').forEach(btn => {
+            btn.onclick = function() {
+                const nombre = this.getAttribute('data-name');
+                alert('Accediendo a la ficha técnica de: ' + nombre + '\nCertificación NatLab PRO: Vigente.');
+            };
+        });
+
+        // Función del formulario del Modal
+        document.getElementById('formFinal').onsubmit = function(e) {
+            e.preventDefault();
+            const nombre = document.getElementById('nombreInput').value;
+            alert('¡Excelente ' + nombre + '! Tu solicitud ha sido procesada por el sistema MediMatch.');
+            bootstrap.Modal.getInstance(document.getElementById('modalCita')).hide();
+            this.reset();
+        };
+
+        // Función del Footer
+        function suscribir() {
+            const email = document.getElementById('emailBoletin').value;
+            if(email.includes('@')) {
+                alert('¡Suscrito con éxito! Recibirás actualizaciones en: ' + email);
+                document.getElementById('emailBoletin').value = '';
+            } else {
+                alert('Por favor, ingresa un correo válido.');
+            }
+        }
+    </script>
 </body>
 </html>
