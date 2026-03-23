@@ -37,3 +37,14 @@ footer {
 footer a:hover {
     transition: 0.3s;
 }
+
+/* Efectos para el Navbar */
+.navbar-brand:hover {
+    transform: scale(1.05);
+    transition: 0.3s;
+}
+.nav-link {
+    font-weight: 500;
+}
+.nav-link:hover {
+}
