@@ -28,3 +28,12 @@ img:hover {
     height: 200px;
     object-fit: cover; /* Esto evita que la imagen se deforme */
 }
+
+/* Estilos para el Footer */
+footer {
+    border-top: 4px solid #dc3545; /* El rojo 'danger' de Bootstrap */
+}
+
+footer a:hover {
+    transition: 0.3s;
+}
