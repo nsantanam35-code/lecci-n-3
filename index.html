@@ -3,97 +3,158 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Red de Salud Digital | Contacto Directo</title>
+    <title>Red de Salud Digital | Portal Completo</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="assets/css/style.css">
+    <style>
+        .hidden { display: none; }
+        .auth-card { max-width: 500px; margin: auto; border: none; border-radius: 15px; background: white; }
+        .profile-badge { background: #fff; color: #dc3545; padding: 5px 15px; border-radius: 20px; font-weight: bold; font-size: 0.9rem; border: 1px solid #dc3545; }
+        html { scroll-behavior: smooth; }
+        .section-padding { padding: 60px 0; }
+        #inicio { background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?auto=format&fit=crop&w=1200&q=80'); background-size: cover; background-position: center; min-height: 400px; display: flex; align-items: center; justify-content: center; }
+    </style>
 </head>
-<body id="inicio">
+<body class="bg-light">
 
-    <nav class="navbar navbar-expand-lg navbar-dark bg-danger shadow-sm sticky-top">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-danger sticky-top shadow">
         <div class="container">
             <a class="navbar-brand fw-bold" href="#inicio">🩺 Red de Salud</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
             <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item"><a class="nav-link" href="#inicio">Inicio</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#servicios">Servicios</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#contacto">Contacto</a></li>
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item"><a class="nav-link" href="#telemedicina">Especialistas</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#farmacia">Farmacia</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#seccion-login">Mi Ficha</a></li>
                 </ul>
+                <div id="user-nav" class="d-flex align-items-center">
+                    <a href="#seccion-login" class="btn btn-outline-light btn-sm">Acceso Pacientes</a>
+                </div>
             </div>
         </div>
     </nav>
 
-    <header class="py-5 mb-5 text-center text-white" style="background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?auto=format&fit=crop&w=1200&q=80'); background-size: cover; background-position: center;">
-        <div class="container py-5">
-            <h1 class="display-4 fw-bold">Conectividad Médica Real</h1>
-            <p class="lead">Navega por nuestros servicios y contáctanos al instante.</p>
+    <header id="inicio" class="text-center text-white">
+        <div class="container">
+            <h1 class="display-4 fw-bold">Tu Salud Digital 2026</h1>
+            <p class="lead">Gestiona tu historial clínico y consulta médicos en línea.</p>
         </div>
     </header>
 
-    <section id="servicios" class="container mb-5 py-4">
+    <section id="telemedicina" class="container section-padding">
+        <div class="text-center mb-5">
+            <h2 class="text-danger fw-bold">Staff Médico Online</h2>
+            <p class="text-muted">Atención inmediata con reembolso Fonasa e Isapre.</p>
+        </div>
         <div class="row row-cols-1 row-cols-md-3 g-4">
-            <div class="col">
-                <div class="card h-100 shadow border-0">
-                    <img src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&w=600&q=80" class="card-img-top" alt="Telemedicina">
+            <div class="col text-center">
+                <div class="card border-0 shadow-sm h-100 p-3">
+                    <img src="https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?auto=format&fit=crop&w=300&h=300" class="rounded-circle mx-auto" style="width:100px; height:100px; object-fit:cover;">
                     <div class="card-body">
-                        <h5 class="card-title fw-bold text-danger">Telemedicina</h5>
-                        <a href="#contacto" class="btn btn-danger w-100">Pedir Cita</a>
+                        <h5 class="fw-bold mb-0">Dr. Byron Donoso</h5>
+                        <p class="text-danger small">Medicina General</p>
+                        <a href="#seccion-login" class="btn btn-danger btn-sm w-100">Agendar Hora</a>
                     </div>
                 </div>
             </div>
-            <div class="col">
-                <div class="card h-100 shadow border-0">
-                    <img src="https://images.unsplash.com/photo-1581056771107-24ca5f033842?auto=format&fit=crop&w=600&q=80" class="card-img-top" alt="Ficha Médica">
+            <div class="col text-center">
+                <div class="card border-0 shadow-sm h-100 p-3">
+                    <img src="https://images.unsplash.com/photo-1594824476967-48c8b964273f?auto=format&fit=crop&w=300&h=300" class="rounded-circle mx-auto" style="width:100px; height:100px; object-fit:cover;">
                     <div class="card-body">
-                        <h5 class="card-title fw-bold text-danger">Ficha Digital</h5>
-                        <a href="#contacto" class="btn btn-danger w-100">Ver Ficha</a>
+                        <h5 class="fw-bold mb-0">Andrea Liquitay</h5>
+                        <p class="text-danger small">Psicología</p>
+                        <a href="#seccion-login" class="btn btn-danger btn-sm w-100">Agendar Hora</a>
                     </div>
                 </div>
             </div>
-            <div class="col">
-                <div class="card h-100 shadow border-0">
-                    <img src="https://images.unsplash.com/photo-1586015555751-63bb77f4322a?auto=format&fit=crop&w=600&q=80" class="card-img-top" alt="Farmacia">
+            <div class="col text-center">
+                <div class="card border-0 shadow-sm h-100 p-3">
+                    <img src="https://images.unsplash.com/photo-1594824476967-48c8b964273f?auto=format&fit=crop&w=300&h=300" class="rounded-circle mx-auto" style="width:100px; height:100px; object-fit:cover;">
                     <div class="card-body">
-                        <h5 class="card-title fw-bold text-danger">Farmacia</h5>
-                        <a href="#contacto" class="btn btn-danger w-100">Comprar</a>
+                        <h5 class="fw-bold mb-0">Erika Miranda</h5>
+                        <p class="text-danger small">Nutrición</p>
+                        <a href="#seccion-login" class="btn btn-danger btn-sm w-100">Agendar Hora</a>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="contacto" class="container my-5 py-5 bg-white shadow rounded border-start border-5 border-danger">
-        <div class="row g-5 px-4">
-            <div class="col-md-5">
-                <h2 class="text-danger fw-bold">Central de Ayuda</h2>
-                <p>📍 Av. Salud Digital 123, Valdivia</p>
-                <p>📞 +56 9 1234 5678</p>
-                <hr>
-                <img src="https://images.unsplash.com/photo-1526628953301-3e589a6a8b74?auto=format&fit=crop&w=500&q=80" class="img-fluid rounded" alt="Mapa">
+    <section id="farmacia" class="bg-white section-padding border-top border-bottom">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-5">
+                    <img src="https://images.unsplash.com/photo-1586015555751-63bb77f4322a?auto=format&fit=crop&w=600&q=80" class="img-fluid rounded shadow" alt="Farmacia">
+                </div>
+                <div class="col-md-7 ps-md-5">
+                    <h2 class="text-danger fw-bold">Farmacia Online</h2>
+                    <p>Accede a convenios exclusivos en las principales farmacias del país:</p>
+                    <div class="d-flex gap-2 flex-wrap">
+                        <a href="https://www.cruzverde.cl" target="_blank" class="btn btn-outline-success">Cruz Verde</a>
+                        <a href="https://www.salcobrand.cl" target="_blank" class="btn btn-outline-primary">Salcobrand</a>
+                        <a href="https://www.farmaciasahumada.cl" target="_blank" class="btn btn-outline-info">Ahumada</a>
+                    </div>
+                </div>
             </div>
-            <div class="col-md-7">
-                <form id="contactForm">
-                    <div class="mb-3">
-                        <label class="form-label fw-bold">Nombre</label>
-                        <input type="text" class="form-control" placeholder="Juan Pérez" required>
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label fw-bold">Mensaje</label>
-                        <textarea class="form-control" rows="4" placeholder="¿En qué podemos ayudarte?"></textarea>
-                    </div>
-                    <button type="submit" class="btn btn-danger btn-lg w-100">Enviar Formulario</button>
+        </div>
+    </section>
+
+    <section id="seccion-login" class="container section-padding">
+        <div id="auth-container" class="card auth-card shadow-lg p-4">
+            <div id="login-box">
+                <h4 class="text-center fw-bold mb-4">Portal Mi Ficha Digital</h4>
+                <form id="login-form">
+                    <input type="text" id="username" class="form-control mb-3" placeholder="Usuario" required>
+                    <input type="password" id="password" class="form-control mb-3" placeholder="Contraseña" required>
+                    <button type="submit" class="btn btn-danger w-100 mb-3">Entrar</button>
+                    <p class="text-center small">¿No tienes ficha? <a href="javascript:void(0)" onclick="toggleAuth()">Regístrate aquí</a></p>
+                </form>
+            </div>
+            <div id="register-box" class="hidden">
+                <h4 class="text-center fw-bold mb-4 text-success">Nuevo Registro</h4>
+                <form id="register-form">
+                    <input type="text" id="reg-fullname" class="form-control mb-3" placeholder="Nombre Completo" required>
+                    <input type="text" id="reg-username" class="form-control mb-3" placeholder="Usuario" required>
+                    <input type="password" id="reg-password" class="form-control mb-3" placeholder="Contraseña" required>
+                    <button type="submit" class="btn btn-success w-100 mb-3">Crear Cuenta</button>
+                    <p class="text-center small">¿Ya tienes cuenta? <a href="javascript:void(0)" onclick="toggleAuth()">Inicia Sesión</a></p>
                 </form>
             </div>
         </div>
+
+        <div id="dashboard-container" class="hidden">
+            <div class="row">
+                <div class="col-md-4 text-center">
+                    <div class="card p-4 border-0 shadow-sm mb-4 bg-white">
+                        <h5 class="fw-bold">Mi Perfil</h5>
+                        <div id="user-info-display" class="my-3 text-danger fw-bold fs-5"></div>
+                        <button onclick="logout()" class="btn btn-outline-secondary btn-sm">Cerrar Sesión</button>
+                    </div>
+                </div>
+                <div class="col-md-8">
+                    <div class="card p-4 border-0 shadow-sm bg-white">
+                        <h5 class="text-danger fw-bold mb-3">Historial Clínico Actualizado</h5>
+                        <div class="mb-4">
+                            <h6 class="border-bottom pb-2 fw-bold text-muted small">RECETAS RECIENTES</h6>
+                            <ul id="lista-recetas" class="list-group list-group-flush"></ul>
+                        </div>
+                        <div>
+                            <h6 class="border-bottom pb-2 fw-bold text-muted small">ÓRDENES MÉDICAS</h6>
+                            <ul id="lista-ordenes" class="list-group list-group-flush"></ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </section>
 
-    <a href="https://wa.me/56912345678?text=Hola,%20necesito%20asistencia%20médica" class="whatsapp-btn shadow-lg" target="_blank">
-        WhatsApp 💬
-    </a>
-
     <footer class="bg-dark text-white text-center py-4 mt-5">
-        <p class="mb-0">© 2026 Red de Salud Digital | Proyecto Operativo</p>
+        <p class="mb-0">© 2026 Red de Salud Digital | Portal Integrado</p>
     </footer>
 
+    <script src="assets/js/auth.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
