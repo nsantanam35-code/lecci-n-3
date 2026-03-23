@@ -1,26 +1,33 @@
 
-/* Configuración Base */
-body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f8f9fa; }
+/* Reset General */
+html { scroll-behavior: smooth; }
+body { background-color: #f4f7f6; color: #333; }
 
-/* Ajuste de Imágenes */
+/* Navbar */
+.navbar { border-bottom: 3px solid #b21f2d; }
+
+/* Imágenes y Efectos */
 .card-img-top {
-    height: 220px;
+    height: 200px;
     object-fit: cover;
-    border-bottom: 3px solid #dc3545;
 }
 
-/* Animación de entrada */
 .card {
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
     border: none;
-    margin-bottom: 20px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
 }
 
 .card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.2);
 }
 
-/* Desplazamiento suave */
-html { scroll-behavior: smooth; }
+/* Botón WhatsApp */
+.btn-whatsapp { animation: pulse 2s infinite; }
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
 
