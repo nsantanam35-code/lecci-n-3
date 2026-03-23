@@ -1,113 +1,125 @@
+const getDB = () => JSON.parse(localStorage.getItem('users_db')) || {};
+const saveDB = (db) => localStorage.setItem('users_db', JSON.stringify(db));
+
 function seleccionarMedico(nombre) {
     localStorage.setItem('medico_seleccionado', nombre);
-    if (localStorage.getItem('session')) {
-        renderDashboard(localStorage.getItem('session'));
+    const session = localStorage.getItem('session');
+    if (session) {
+        renderDashboard(session);
         window.location.href = "#seccion-login";
     } else {
         window.location.href = "#seccion-login";
-        alert("Has seleccionado a " + nombre + ". Inicia sesión para confirmar.");
+        alert("Seleccionaste a " + nombre + ". Inicia sesión para ver el valor de tu bono.");
     }
 }
 
-function renderDashboard(user) {
-    const users = JSON.parse(localStorage.getItem('users_db')) || {};
-    const data = users[user];
-    const medicoPendiente = localStorage.getItem('medico_seleccionado');
-    
-    if(!data) return;
+function toggleAuth() {
+    document.getElementById('login-box').classList.toggle('hidden');
+    document.getElementById('register-box').classList.toggle('hidden');
+}
 
+document.getElementById('register-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const user = document.getElementById('reg-username').value.toLowerCase().trim();
+    const name = document.getElementById('reg-fullname').value.trim();
+    const pass = document.getElementById('reg-password').value;
+    const prev = document.getElementById('reg-prevision').value;
+    
+    let db = getDB();
+    if (db[user]) return alert("Usuario ya existe.");
+
+    db[user] = { nombre: name, pass: pass, prevision: prev, recetas: [], citas: [] };
+    saveDB(db);
+    alert("¡Registro exitoso!");
+    toggleAuth();
+});
+
+document.getElementById('login-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const user = document.getElementById('username').value.toLowerCase().trim();
+    const pass = document.getElementById('password').value;
+    const db = getDB();
+    if (db[user] && db[user].pass === pass) {
+        localStorage.setItem('session', user);
+        renderDashboard(user);
+    } else { alert("Error en los datos."); }
+});
+
+function renderDashboard(userId) {
+    const db = getDB();
+    const data = db[userId];
+    if (!data) return;
+
+    const medicoPendiente = localStorage.getItem('medico_seleccionado');
     document.getElementById('auth-container').classList.add('hidden');
     document.getElementById('dashboard-container').classList.remove('hidden');
+    
+    // Calcular valor según previsión
+    let valorBono = "$12.990"; // Default Isapre
+    if (data.prevision === "FONASA") valorBono = "$3.500";
+    if (data.prevision === "DIPRECA") valorBono = "$2.100";
+
     document.getElementById('user-info-display').innerHTML = `
-        <div class="d-flex justify-content-between align-items-center">
-            <span>Paciente: <strong>${data.nombre}</strong></span>
-            <span class="badge bg-info text-dark">${data.prevision || 'FONASA'}</span>
+        <div class="p-3 border rounded bg-white shadow-sm mb-3">
+            <h5 class="mb-1 text-dark">${data.nombre}</h5>
+            <span class="badge bg-primary">${data.prevision}</span>
+            <hr>
+            <p class="small mb-0">Estado de Cuenta: <span class="text-success fw-bold">Al día</span></p>
         </div>
     `;
 
-    // ÁREA DE AGENDAMIENTO ACTIVO
     const agendaDiv = document.getElementById('agenda-selector');
-    if(medicoPendiente) {
+    if (medicoPendiente) {
         agendaDiv.innerHTML = `
-            <div class="alert alert-warning border-0 shadow-sm">
-                <h6 class="fw-bold text-dark">🗓️ Reservando con ${medicoPendiente}</h6>
-                <input type="date" id="fecha-cita" class="form-control form-control-sm mb-2" value="2026-03-24">
-                <div class="d-flex gap-2 flex-wrap">
-                    <button onclick="confirmarCita('09:00')" class="btn btn-sm btn-danger">09:00</button>
-                    <button onclick="confirmarCita('11:00')" class="btn btn-sm btn-danger">11:00</button>
-                    <button onclick="confirmarCita('16:00')" class="btn btn-sm btn-danger">16:00</button>
+            <div class="card border-danger mb-3 shadow">
+                <div class="card-body">
+                    <h6 class="fw-bold text-danger">🛒 Confirmar Atención</h6>
+                    <p class="small mb-2">Especialista: <strong>${medicoPendiente}</strong></p>
+                    <p class="small mb-3">Valor Copago (${data.prevision}): <span class="fs-5 fw-bold text-dark">${valorBono}</span></p>
+                    
+                    <input type="date" id="fecha-cita" class="form-control mb-2" value="2026-03-24">
+                    <div class="d-flex gap-2">
+                        <button onclick="confirmarCita('09:00')" class="btn btn-danger w-100">Pagar y Agendar 09:00</button>
+                        <button onclick="confirmarCita('11:30')" class="btn btn-danger w-100">Pagar y Agendar 11:30</button>
+                    </div>
                 </div>
-                <button onclick="cancelarSeleccion()" class="btn btn-link btn-sm text-muted mt-2">Cancelar</button>
-            </div>
-        `;
+            </div>`;
     } else {
-        agendaDiv.innerHTML = `
-            <div class="p-3 text-center border rounded border-secondary border-opacity-25 bg-white">
-                <p class="small text-muted mb-2">¿Necesitas una nueva cita?</p>
-                <a href="#telemedicina" class="btn btn-outline-danger btn-sm px-4">Ver Especialistas</a>
-            </div>
-        `;
+        agendaDiv.innerHTML = `<div class="alert alert-light border small text-center">Selecciona un médico para cotizar tu bono.</div>`;
     }
 
-    // LISTADO DE CITAS CONFIRMADAS
-    const citas = data.citas || [];
-    const listaCitasHTML = citas.length > 0 
-        ? citas.map(c => `<li class="list-group-item d-flex justify-content-between align-items-center small">
+    const listaCitas = (data.citas || []).map(c => 
+        `<li class="list-group-item d-flex justify-content-between align-items-center">
             <span>📅 ${c.fecha} - ${c.hora}</span>
             <span class="fw-bold">${c.medico}</span>
-          </li>`).join('')
-        : '<li class="list-group-item text-muted small text-center">No tienes citas programadas</li>';
+        </li>`).join('');
 
     document.getElementById('lista-recetas').innerHTML = `
-        <div class="mt-3">
-            <h6 class="fw-bold small text-uppercase text-secondary">Mis Próximas Citas</h6>
-            <ul class="list-group list-group-flush mb-3">${listaCitasHTML}</ul>
-            <h6 class="fw-bold small text-uppercase text-secondary">Recetas y Órdenes</h6>
-            <ul class="list-group list-group-flush">${data.recetas.map(r => `<li class="list-group-item border-0 px-0">📄 ${r}</li>`).join('')}</ul>
-        </div>
-    `;
+        <div class="mt-2">
+            <h6 class="fw-bold small text-muted">HISTORIAL DE BONOS PAGADOS</h6>
+            <ul class="list-group list-group-flush">${listaCitas || '<li class="list-group-item small">No hay pagos recientes</li>'}</ul>
+        </div>`;
 }
 
 function confirmarCita(hora) {
     const fecha = document.getElementById('fecha-cita').value;
     const medico = localStorage.getItem('medico_seleccionado');
-    const user = localStorage.getItem('session');
-    
-    if(!fecha) { alert("Selecciona una fecha"); return; }
+    const userId = localStorage.getItem('session');
+    if (!fecha) return alert("Selecciona fecha");
 
-    let users = JSON.parse(localStorage.getItem('users_db'));
-    if(!users[user].citas) users[user].citas = [];
+    let db = getDB();
+    db[userId].citas.push({ medico, fecha, hora });
+    saveDB(db);
     
-    // Guardamos la cita en el perfil del usuario
-    users[user].citas.push({ medico, fecha, hora });
-    localStorage.setItem('users_db', JSON.stringify(users));
-    
-    alert(`✅ Cita confirmada con ${medico}`);
+    alert("💸 Pago procesado con éxito. Su bono ha sido emitido.");
     localStorage.removeItem('medico_seleccionado');
-    renderDashboard(user); // Actualizamos la vista sin recargar la página completa
-}
-
-function cancelarSeleccion() {
-    localStorage.removeItem('medico_seleccionado');
-    renderDashboard(localStorage.getItem('session'));
+    renderDashboard(userId);
 }
 
 function logout() {
-    localStorage.removeItem('session');
-    localStorage.removeItem('medico_seleccionado');
+    localStorage.clear();
     location.reload();
 }
 
-// Mantener el resto de funciones de login/registro iguales...
-document.getElementById('login-form')?.addEventListener('submit', function(e) {
-    e.preventDefault();
-    const user = document.getElementById('username').value.toLowerCase();
-    const pass = document.getElementById('password').value;
-    let users = JSON.parse(localStorage.getItem('users_db')) || {};
-    if (users[user] && users[user].pass === pass) {
-        localStorage.setItem('session', user);
-        renderDashboard(user);
-    } else { alert("Datos incorrectos"); }
-});
-
-if(localStorage.getItem('session')) renderDashboard(localStorage.getItem('session'));
+const sessionActiva = localStorage.getItem('session');
+if (sessionActiva) renderDashboard(sessionActiva);
