@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Recetario Comunitario - SaludVital</title>
+    <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body style="background:#f4f7f6;">
+    <nav class="navbar"><a href="index.html" style="color:white;">← Volver a la Tienda</a></nav>
+    <div class="content-section">
+        <h1>Muro de Recetas Saludables</h1>
+        <div class="foro-container">
+            <div id="registro-seccion">
+                <input type="text" id="nombre-user" placeholder="Crea tu usuario para comentar...">
+                <button onclick="registrar()">Entrar</button>
+            </div>
+            <div id="foro-content" style="display:none;">
+                <div class="post-receta">
+                    <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=300" style="float:left; margin-right:20px; border-radius:10px;">
+                    <strong>Bowl de Quinoa y Salmón</strong>
+                    <p>Ideal para después de entrenar. ¡Altamente proteico!</p>
+                    <button class="btn-accion" onclick="alert('Respuesta enviada')">Responder</button>
+                </div>
+                <hr>
+                <textarea id="nuevo-post" placeholder="Escribe tu propia receta aquí..."></textarea>
+                <button class="btn-main" onclick="alert('Publicado con éxito')">Publicar Receta</button>
+            </div>
+        </div>
+    </div>
+    <script>
+        function registrar(){
+            if(document.getElementById('nombre-user').value){
+                document.getElementById('registro-seccion').style.display='none';
+                document.getElementById('foro-content').style.display='block';
+            }
+        }
+    </script>
+</body>
+</html>

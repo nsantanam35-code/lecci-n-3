@@ -3,135 +3,127 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RSD | Red de Salud Digital</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="assets/css/style.css">
-    <style>
-        .hidden { display: none; }
-        .auth-card { max-width: 500px; margin: auto; border: none; border-radius: 15px; background: white; }
-        html { scroll-behavior: smooth; }
-        .navbar-custom { background-color: #000000; }
-        .navbar-custom .navbar-brand, .navbar-custom .nav-link { color: #ffffff; }
-        #inicio { 
-            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?auto=format&fit=crop&w=1200&q=80'); 
-            background-size: cover; background-position: center; min-height: 400px; display: flex; align-items: center; justify-content: center; 
-        }
-        .btn-whatsapp { position: fixed; bottom: 20px; right: 20px; background-color: #25d366; color: white; padding: 15px 25px; border-radius: 50px; text-decoration: none; z-index: 1000; font-weight: bold; box-shadow: 0 4px 10px rgba(0,0,0,0.3); }
-    </style>
+    <title>SaludVital Elite | Nataly</title>
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
-<body class="bg-light">
+<body>
 
-    <nav class="navbar navbar-expand-lg navbar-custom sticky-top shadow">
-        <div class="container">
-            <a class="navbar-brand fw-bold" href="#inicio"><span style="color: #dc3545;">✚</span> RSD | Red de Salud</a>
-            <div id="user-nav" class="ms-auto">
-                <a href="#seccion-login" class="btn btn-danger btn-sm text-white">Mi Ficha Médica</a>
-            </div>
+    <nav class="navbar">
+        <div class="logo">SALUDVITAL<span>ELITE</span></div>
+        <ul class="nav-links">
+            <li><a href="#tienda">Tienda</a></li>
+            <li><a href="#muro">Comunidad</a></li>
+            <li><a href="#planes">Planes</a></li>
+        </ul>
+        <div class="cart-trigger" onclick="toggleCart()">
+            <i class="fas fa-shopping-bag"></i>
+            <span id="cart-count">0</span>
         </div>
     </nav>
 
-    <header id="inicio" class="text-center text-white">
-        <div class="container">
-            <h1 class="display-4 fw-bold">Tu Salud en un Clic</h1>
-            <p class="lead">Convenios con Fonasa, Isapre y Dipreca.</p>
+    <section id="tienda" class="content-section">
+        <h2 class="section-title">PRODUCTOS DESTACADOS</h2>
+        <div class="category-grid">
+            <div class="cat-card" onclick="showCategory('suplementos')">
+                <img src="https://images.unsplash.com/photo-1579722820308-d74e571900a9?w=600" alt="Suplementos">
+                <div class="cat-overlay"><h3>SUPLEMENTOS</h3></div>
+            </div>
+            <div class="cat-card" onclick="showCategory('ropa')">
+                <img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=600" alt="Ropa">
+                <div class="cat-overlay"><h3>ROPA DEPORTIVA</h3></div>
+            </div>
+            <div class="cat-card" onclick="showCategory('accesorios')">
+                <img src="https://images.unsplash.com/photo-1517836357463-d25dfeac3438?w=600" alt="Accesorios">
+                <div class="cat-overlay"><h3>ACCESORIOS</h3></div>
+            </div>
         </div>
-    </header>
 
-    <section id="telemedicina" class="container py-5">
-        <div class="text-center mb-5">
-            <h2 class="text-danger fw-bold">Especialistas Disponibles</h2>
+        <div id="product-display" class="product-viewer" style="display:none;">
+            <div class="viewer-header">
+                <h3 id="cat-title">PRODUCTOS</h3>
+                <span class="close-btn" onclick="closeCategory()">&times;</span>
+            </div>
+            <div id="product-list" class="product-grid"></div>
         </div>
-        <div class="row row-cols-1 row-cols-md-3 g-4">
-            <div class="col text-center">
-                <div class="card border-0 shadow-sm h-100 p-3">
-                    <img src="https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?auto=format&fit=crop&w=300&h=300" class="rounded-circle mx-auto mt-3" style="width:110px; height:110px; object-fit:cover;">
-                    <div class="card-body">
-                        <h5 class="fw-bold mb-0">Dr. Byron Donoso</h5>
-                        <p class="text-danger small">Medicina General</p>
-                        <button onclick="seleccionarMedico('Dr. Byron Donoso')" class="btn btn-danger btn-sm w-100">Agendar Hora</button>
-                    </div>
-                </div>
+    </section>
+
+    <section id="planes" class="content-section gray-bg">
+        <h2 class="section-title">PLANES DE ENTRENAMIENTO</h2>
+        <div class="planes-wrapper">
+            <div class="plan-item">
+                <div class="plan-badge">GUIAS PDF</div>
+                <img src="https://images.unsplash.com/photo-1494597564530-811f3a97a352?w=500" class="plan-img">
+                <h3>PLAN BÁSICO</h3>
+                <div class="price">.00</div>
+                <ul>
+                    <li><i class="fas fa-check"></i> Rutinas Mensuales</li>
+                    <li><i class="fas fa-check"></i> Guía Nutricional</li>
+                </ul>
+                <button class="btn-buy" onclick="addToCart('Plan Básico', 5.00)">COMPRAR AHORA</button>
             </div>
-            <div class="col text-center">
-                <div class="card border-0 shadow-sm h-100 p-3">
-                    <img src="https://images.unsplash.com/photo-1594824476967-48c8b964273f?auto=format&fit=crop&w=300&h=300" class="rounded-circle mx-auto mt-3" style="width:110px; height:110px; object-fit:cover;">
-                    <div class="card-body">
-                        <h5 class="fw-bold mb-0">Andrea Liquitay</h5>
-                        <p class="text-danger small">Psicología</p>
-                        <button onclick="seleccionarMedico('Andrea Liquitay')" class="btn btn-danger btn-sm w-100">Agendar Hora</button>
-                    </div>
+            <div class="plan-item featured">
+                <div class="plan-badge">VIDEO HD</div>
+                <div class="video-container">
+                    <img src="https://images.unsplash.com/photo-1517836357463-d25dfeac3438?w=500" class="plan-img">
+                    <div class="play-btn"><i class="fas fa-play"></i></div>
                 </div>
-            </div>
-            <div class="col text-center">
-                <div class="card border-0 shadow-sm h-100 p-3">
-                    <img src="https://images.unsplash.com/photo-1559839734-2b71f1e598c6?auto=format&fit=crop&w=300&h=300" class="rounded-circle mx-auto mt-3" style="width:110px; height:110px; object-fit:cover;">
-                    <div class="card-body">
-                        <h5 class="fw-bold mb-0">Erika Miranda</h5>
-                        <p class="text-danger small">Nutrición</p>
-                        <button onclick="seleccionarMedico('Erika Miranda')" class="btn btn-danger btn-sm w-100">Agendar Hora</button>
-                    </div>
-                </div>
+                <h3>ELITE PRO</h3>
+                <div class="price">.00</div>
+                <ul>
+                    <li><i class="fas fa-check"></i> Clases en Video</li>
+                    <li><i class="fas fa-check"></i> Asesoría Personalizada</li>
+                </ul>
+                <button class="btn-buy" onclick="addToCart('Plan Elite Pro', 9.00)">COMPRAR AHORA</button>
             </div>
         </div>
     </section>
 
-    <section id="farmacia" class="bg-white py-5 border-top border-bottom">
-        <div class="container text-center">
-            <h2 class="text-danger fw-bold mb-4">Farmacias en Convenio</h2>
-            <div class="d-flex gap-3 justify-content-center flex-wrap">
-                <a href="https://www.drsimi.cl" target="_blank" class="btn btn-warning fw-bold px-4">💊 Dr. Simi (Ahorro)</a>
-                <a href="https://www.cruzverde.cl" target="_blank" class="btn btn-outline-success px-4">Cruz Verde</a>
-                <a href="https://www.salcobrand.cl" target="_blank" class="btn btn-outline-primary px-4">Salcobrand</a>
-            </div>
-        </div>
+    <section id="muro" class="content-section dark-bg">
+        <h2 class="section-title white-txt">MURO DE RECETAS</h2>
+        <div class="recipe-grid" id="muro-recetas"></div>
     </section>
 
-    <section id="seccion-login" class="container py-5">
-        <div id="auth-container" class="card auth-card shadow-lg p-4">
-            <div id="login-box">
-                <h4 class="text-center fw-bold mb-4">Portal del Paciente</h4>
-                <form id="login-form">
-                    <input type="text" id="username" class="form-control mb-3" placeholder="Usuario" required>
-                    <input type="password" id="password" class="form-control mb-3" placeholder="Contraseña" required>
-                    <button type="submit" class="btn btn-danger w-100 mb-3">Entrar</button>
-                    <p class="text-center small">¿No tienes cuenta? <a href="javascript:void(0)" onclick="toggleAuth()">Regístrate aquí</a></p>
-                </form>
+    <footer class="main-footer">
+        <div class="footer-container">
+            <div class="footer-column">
+                <h4 class="footer-logo">SALUDVITAL<span>ELITE</span></h4>
+                <p>Tu mejor versión comienza con la nutrición correcta y el entrenamiento adecuado. Únete a la comunidad de Nataly.</p>
             </div>
-            <div id="register-box" class="hidden">
-                <h4 class="text-center fw-bold mb-4 text-success">Nuevo Registro</h4>
-                <form id="register-form">
-                    <input type="text" id="reg-fullname" class="form-control mb-3" placeholder="Nombre Completo" required>
-                    <input type="text" id="reg-username" class="form-control mb-3" placeholder="Usuario" required>
-                    <input type="password" id="reg-password" class="form-control mb-3" placeholder="Contraseña" required>
-                    <select id="reg-prevision" class="form-select mb-3" required>
-                        <option value="" disabled selected>Selecciona tu Previsión</option>
-                        <option value="FONASA">FONASA</option>
-                        <option value="ISAPRE">ISAPRE</option>
-                        <option value="DIPRECA">DIPRECA</option>
-                    </select>
-                    <button type="submit" class="btn btn-success w-100 mb-3">Crear Ficha</button>
-                    <p class="text-center small">¿Ya tienes cuenta? <a href="javascript:void(0)" onclick="toggleAuth()">Inicia Sesión</a></p>
-                </form>
+            <div class="footer-column">
+                <h4>SÍGUENOS</h4>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-tiktok"></i></a>
+                </div>
+            </div>
+            <div class="footer-column">
+                <h4>CONTACTO</h4>
+                <p><i class="fab fa-whatsapp"></i> +56 9 5953 0948</p>
+                <p><i class="fas fa-envelope"></i> contacto@saludvital.cl</p>
+                <p><i class="fas fa-map-marker-alt"></i> Chile</p>
             </div>
         </div>
-
-        <div id="dashboard-container" class="hidden">
-            <div class="card p-4 border-0 shadow-sm bg-white">
-                <div id="user-info-display" class="mb-3 fw-bold text-danger"></div>
-                <div id="agenda-selector" class="p-3 bg-light rounded mb-4"></div>
-                <div id="lista-recetas"></div>
-                <button onclick="logout()" class="btn btn-outline-secondary btn-sm mt-3">Cerrar Sesión</button>
-            </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 SaludVital Elite - Diseñado para Nataly Fitness.</p>
         </div>
-    </section>
-
-    <a href="https://wa.me/56912345678" class="btn-whatsapp" target="_blank">WhatsApp 💬</a>
-
-    <footer class="bg-dark text-white text-center py-4 mt-5">
-        <p class="small mb-0">FONASA | ISAPRE | DIPRECA | DR. SIMI</p>
-        <p class="mb-0">© 2026 RSD Valdivia</p>
     </footer>
 
-    <script src="assets/js/auth.js"></script>
+    <div id="shopping-cart" class="cart-sidebar">
+        <div class="cart-header"><h3>MI CARRITO</h3><i class="fas fa-times" onclick="toggleCart()"></i></div>
+        <div id="cart-items" class="cart-body"></div>
+        <div class="cart-footer">
+            <div class="total-box"><span>SUBTOTAL:</span><span id="total-price">/bin/bash.00</span></div>
+            <button class="btn-checkout" onclick="checkout()">PEDIR POR WHATSAPP</button>
+        </div>
+    </div>
+
+    <div class="float-group">
+        <button onclick="window.scrollTo({top:0, behavior:'smooth'})" class="btn-float"><i class="fas fa-arrow-up"></i></button>
+        <a href="https://wa.me/56959530948" class="btn-float wa" target="_blank"><i class="fab fa-whatsapp"></i></a>
+    </div>
+
+    <script src="assets/js/script.js"></script>
 </body>
 </html>
